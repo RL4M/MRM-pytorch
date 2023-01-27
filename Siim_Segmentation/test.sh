@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 python tools/test.py configs/mrm/upernet_mrm-base_fp16_8x2_512x512_160k_siim.py /path/to/finetuned/weights --eval medDice
