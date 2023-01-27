@@ -18,13 +18,16 @@ If you are using anaconda/miniconda, we provide an easy way to prepare the envir
 #### 2.1 Data preparation for pre-training
 - We use MIMIC-CXR-JPG for pre-training. You can acquire more information about this dataset at [Johnson et al. MIMIC-CXR-JPG](https://physionet.org/content/mimic-cxr-jpg/2.0.0/).
 - The dataset directory specified in [run.sh](/run.sh) includes the MIMIC-CXR-JPG dataset and you need to prepare a file "training.csv" and put it into the dataset directory.
-- The file "training.csv" includes two columns  "image_path" and "report_content" for each line, corresponding to 1. the path to an image, 2. the text of the corresponding report.
+- The file "training.csv" includes two columns  "image_path" and "report_content" for each line, corresponding to 1. the path to an image, 2. the text of the corresponding report, which should be organized as follows:
 
-  
+      image_path,report_content
+      /path/to/img1.jpg,FINAL REPORT  EXAMINATION: ...
+      /path/to/img2.jpg,FINAL REPORT  CHEST: ...
+      ...,...
 
 #### 2.2 Start pre-training
-- Download the pre-trained weights of [MAE](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base.pth) and set "resume" to the path of pre-trained weights in [run.sh](/run.sh).
-- Set the data path, GPU IDs, batch size, output directory, and other parameters in [run.sh](/run.sh).
+- Download the pre-trained weights of [MAE](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base.pth) and set "resume" to the path of pre-trained weights in [run.sh](run.sh).
+- Set the data path, GPU IDs, batch size, output directory, and other parameters in [run.sh](run.sh).
 
 - Start training by running
 
@@ -87,8 +90,7 @@ Then organize the directory as follows:
 #### 4.2 Necessary files for segmentation
 We conduct all experiments  of segmentation by [MMSegmentaiton](https://github.com/open-mmlab/mmsegmentation) (version  0.25.0) and it is necessary to set the environment and comprehend the code structures of MMSegmentaiton in advance.
 
-Here we provide the necessary configuration files for reproducing the experiments  in the directory "Siim _Segmentation".
-
+Here we provide the necessary configuration files for reproducing the experiments in the directory [Siim_Segmentation](Siim_Segmentation). After modifying MMSegmentaiton framework with provided files, start fine-tuning and evaluation with [ft.sh](Siim_Segmentation/ft.sh) and [test.sh](Siim_Segmentation/test.sh), respectively.
 
 ### 5 Links to download datasets
 - [MIMIC-CXR-JPG](https://physionet.org/content/mimic-cxr-jpg/2.0.0/)
@@ -102,3 +104,12 @@ Here we provide the necessary configuration files for reproducing the experiment
 - [COVID-19 Image Data Collection](https://github.com/ieee8023/covid-chestxray-dataset)
 
 - [SIIM-ACR Pneumothorax](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation)
+
+### 6 Datasets splits
+In the directory [DatasetsSplits](DatasetsSplits), we provide dataset splits that may be helpful for organizing the datasets.
+
+We give the train/valid/test set of [CheXpert](DatasetsSplits/CheXpert), [NIH ChestX-ray](DatasetsSplits/NIH_ChestX-ray), and [RSNA Pneumonia](DatasetsSplits/RSNA_Pneumonia).
+
+For [COVID-19 Image Data Collection](DatasetsSplits/COVID-19_Image_Data_Collection), we randomly split the train/valid/test set 5 times and we provide the images in the [images](DatasetsSplits/COVID-19_Image_Data_Collection/images) directory.
+
+For [SIIM-ACR_Pneumothorax](DatasetsSplits/SIIM-ACR_Pneumothorax), please organize the directories of images and annotations as section 4.1 mentioned according to the given splits.
