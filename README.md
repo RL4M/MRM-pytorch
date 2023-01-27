@@ -4,7 +4,8 @@ This is the Official Implement of the paper: [Advancing Radiograph Representatio
 Some code of this repository is borrowed from [MAE](https://github.com/facebookresearch/mae), [huggingface](https://huggingface.co) and [REFERS](https://github.com/funnyzhou/REFERS).
 
 ## Getting started
-### 1 Environmental Requirement
+### 1 Environmental preparation and quick start
+#### 1.1 Environmental requirement
 - Ubuntu 18.04 LTS.
 
 - Python 3.8.11
@@ -13,6 +14,26 @@ If you are using anaconda/miniconda, we provide an easy way to prepare the envir
 
       conda env create -f environment.yaml
       pip install -r requirements.txt
+
+#### 1.2 Load the encoder part of MRM
+```python
+import torch
+import torch.nn as nn
+from functools import partial
+import timm
+assert timm.__version__ == "0.6.12"  # version check
+from timm.models.vision_transformer import VisionTransformer
+
+def vit_base_patch16(**kwargs):
+    model = VisionTransformer(norm_layer=partial(nn.LayerNorm, eps=1e-6),**kwargs)
+    return model
+
+# define model
+model = vit_base_patch16(num_classes=14,drop_path_rate=0.1,global_pool="avg")
+checkpoint_model = torch.load("./MRM.pth", map_location="cpu")["model"]
+# load pre-trained model
+model.load_state_dict(checkpoint_model, strict=False)
+```
 
 ### 2 Pre-training
 #### 2.1 Data preparation for pre-training
