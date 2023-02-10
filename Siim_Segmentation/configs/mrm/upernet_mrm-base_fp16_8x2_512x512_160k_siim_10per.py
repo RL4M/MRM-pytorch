@@ -1,6 +1,6 @@
 _base_ = [
     '../_base_/models/upernet_mae.py', '../_base_/datasets/siim.py',
-    '../_base_/default_runtime.py', '../_base_/schedules/schedule_160k.py'
+    '../_base_/default_runtime.py', '../_base_/schedules/schedule_5k.py'
 ]
 
 model = dict(
@@ -36,7 +36,7 @@ lr_config = dict(
     _delete_=True,
     policy='poly',
     warmup='linear',
-    warmup_iters=1500,
+    warmup_iters=100,
     warmup_ratio=1e-6,
     power=1.0,
     min_lr=0.0,
@@ -48,4 +48,4 @@ fp16 = dict(loss_scale='dynamic')
 # By default, models are trained on 8 GPUs with 2 images per GPU
 data = dict(samples_per_gpu=2)
 checkpoint_config = dict(by_epoch=False, interval=10000)
-evaluation = dict(by_epoch=False, interval=500, metric='medDice',save_best='Dice.front',rule = 'greater')
+evaluation = dict(by_epoch=False, interval=50, metric='medDice',save_best='Dice.front',rule = 'greater')
