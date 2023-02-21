@@ -85,13 +85,13 @@ model.load_state_dict(checkpoint_model, strict=False)
       ./finetuning_1percent.sh
 ```
 ### 4.3 More fine-tuning hyperparameters
-|     RSNA    |     warm up setps    |     total steps    |     learning rate    |   |
-|-------------|----------------------|--------------------|----------------------|---|
-|     1%      |     50               |     2000           |     3e-3             |   |
-|     10%     |     200              |     10000          |     5e-4             |   |
-|     100%    |     2000             |     50000          |     5e-4             |   |
+|     RSNA    |     warm up setps    |     total steps    |     learning rate    |
+|-------------|----------------------|--------------------|----------------------|
+|     1%      |     50               |     2000           |     3e-3             |
+|     10%     |     200              |     10000          |     5e-4             |
+|     100%    |     2000             |     50000          |     5e-4             |
 
-|     CheXpert    |     warm up setps    |     total steps    |     learning rate    |
+|     CheXpert        |     warm up setps    |     total steps    |     learning rate    |
 |---------------------|----------------------|--------------------|----------------------|
 |     1%              |     150              |     2000           |     3e-3             |
 |     10%             |     1500             |     60000          |     5e-4             |
@@ -100,7 +100,6 @@ model.load_state_dict(checkpoint_model, strict=False)
 |     Covid    |     warm up setps    |     total steps    |     learning rate    |
 |--------------|----------------------|--------------------|----------------------|
 |     100%     |     50               |     1000           |     3e-2             |
-|              |                      |                    |                      |
 ## 5 Fine-tuning of segmentation
 ### 5.1 Data preparation
 - Download SIIM-ACR Pneumothorax and preprocess the images and annotations.
