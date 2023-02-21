@@ -41,11 +41,14 @@ model.load_state_dict(checkpoint_model, strict=False)
 - The dataset directory specified in [run.sh](/run.sh) includes the MIMIC-CXR-JPG dataset and you need to prepare a file ``training.csv`` and put it into the dataset directory.
 - The file ``training.csv`` includes two columns ``image_path`` and ``report_content`` for each line, corresponding to (a) the path to an image and (b) the text of the corresponding report, respectively, which should be organized as follows:
 ```
-      image_path,report_content
-      /path/to/img1.jpg,FINAL REPORT  EXAMINATION: ...
-      /path/to/img2.jpg,FINAL REPORT  CHEST: ...
+      image_path, report_content
+      /path/to/img1.jpg, FINAL REPORT  EXAMINATION: ...
+      /path/to/img2.jpg, FINAL REPORT  CHEST: ...
       ...,...
 ```
+- take one line as an example:
+![img](imgs/example.png)
+
 ### 3.2 Start pre-training
 - Download the pre-trained weight of [MAE](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base.pth) and set ``resume`` to the path of the pre-trained weight in [run.sh](run.sh).
 - Set the data path, GPU IDs, batch size, output directory, and other parameters in [run.sh](run.sh).
